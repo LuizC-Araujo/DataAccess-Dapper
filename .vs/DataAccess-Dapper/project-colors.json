@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "632fb666-3f9f-4f3f-a15a-d2bf2d0a8725": {
+      "ProjectGuid": "632fb666-3f9f-4f3f-a15a-d2bf2d0a8725",
+      "DisplayName": "DataAccess-Dapper",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "SznM6C/zU9MYpO/a5XrKpqjI9XDMsKfC6D4KQGh+fX0zjEZIjaloqD+gslE3A2ZVFbasJeCeQcJZQzo3y67+Ow==",
+  "success": true,
+  "projectFilePath": "E:\\DataAccess-Dapper\\DataAccess-Dapper\\DataAccess-Dapper.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\lj133\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.13\\microsoft.netcore.app.host.win-x64.5.0.13.nupkg.sha512"
+  ],
+  "logs": []
+}
