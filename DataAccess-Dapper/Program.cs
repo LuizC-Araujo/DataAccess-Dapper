@@ -31,7 +31,9 @@ namespace DataAccess_Dapper
                 //ReadView(connection);
                 //OneToOne(connection);
                 //OneToMany(connection);
-
+                //QueryMultiple(connection);
+                //SelectIn(connection);
+                //Like(connection, "api");
             }
         }
 
@@ -302,7 +304,7 @@ namespace DataAccess_Dapper
                         SELECT 
                             * 
                         FROM
-                            Career
+                            [Career]
                         WHERE
                             [Id] IN @Id";
 
@@ -314,6 +316,28 @@ namespace DataAccess_Dapper
                     "b9809ce4-85f2-41e5-9cf3-dc4975f167a4",
                     "b9809ce4-85f2-41e5-9cf3-dc4975f167a4"
                 }
+            });
+
+            foreach (var item in items)
+            {
+                Console.WriteLine(item.Title);
+            }
+        }
+
+        static void Like(SqlConnection connection, string term)
+        {
+            var query = @"
+                        SELECT 
+                            * 
+                        FROM
+                            [Course]
+                        WHERE
+                            [Title] LIKE @exp";
+
+
+            var items = connection.Query<Course>(query, new
+            {
+                exp = $"%{term}%"
             });
 
             foreach (var item in items)
