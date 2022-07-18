@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-
+using System.Linq;
 using Dapper;
 
 using DataAccess_Dapper.Model;
@@ -244,11 +245,23 @@ namespace DataAccess_Dapper
                         [CareerItem] ON [CareerItem].[CareerId] = [Career].[Id]
                     ORDER BY
                         [Career].[Title]";
-                   
-            var careers = connection.Query<Career, CareerItem, Career>(
+
+            var careers = new List<Career>();
+            var items = connection.Query<Career, CareerItem, Career>(
                 sql, 
                 (career, careerItem) => 
                 {
+                    var car = careers.Where(x => x.Id == career.Id).FirstOrDefault();
+                    if (car == null)
+                    {
+                        car = career;
+                        car.Items.Add(careerItem);
+                        careers.Add(car);
+                    }
+                    else
+                    {
+                        car.Items.Add(careerItem);
+                    }
                     return career;
                 }, splitOn: "[CareerId]");
 
