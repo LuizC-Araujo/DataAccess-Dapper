@@ -59,5 +59,18 @@ namespace DataAccess_Dapper
             });
 
             Console.WriteLine($"{rows} linhas inseridas");
-        }    }
+        }    
+        
+        static void UpdateCategory(SqlConnection connection)
+        {
+            var updateQuery = "UPDATE [Category] SET [Title]=@title WHERE [Id]=@id";
+            var rows = connection.Execute(updateQuery, new
+            {
+                id = new Guid("b9809ce4-85f2-41e5-9cf3-dc4975f167a4"),
+                title = "New title"
+            });
+        }
+    }
+
+
 }
