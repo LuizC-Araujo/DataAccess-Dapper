@@ -295,6 +295,32 @@ namespace DataAccess_Dapper
                 }
             }
         }
+
+        static void SelectIn(SqlConnection connection)
+        {
+            var query = @"
+                        SELECT 
+                            * 
+                        FROM
+                            Career
+                        WHERE
+                            [Id] IN @Id";
+
+
+            var items = connection.Query<Career>(query, new
+            {
+                id = new[]
+                {
+                    "b9809ce4-85f2-41e5-9cf3-dc4975f167a4",
+                    "b9809ce4-85f2-41e5-9cf3-dc4975f167a4"
+                }
+            });
+
+            foreach (var item in items)
+            {
+                Console.WriteLine(item.Title);
+            }
+        }
     }
 
 
