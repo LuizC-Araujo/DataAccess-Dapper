@@ -28,6 +28,9 @@ namespace DataAccess_Dapper
                 //ExecuteReadProcedure(connection);
                 //ExecuteScalar(connection);
                 //ReadView(connection);
+                //OneToOne(connection);
+                //OneToMany(connection);
+
             }
         }
 
@@ -226,7 +229,39 @@ namespace DataAccess_Dapper
                 Console.WriteLine($"{item.Title} - Curso: {item.Course.Title}");
             }
         }
-       
+
+        static void OneToMany(SqlConnection connection)
+        {
+            var sql = @"
+                    SELECT 
+                        [Career].[Id],
+                        [Career].[Title],
+                        [CareerItem].[CareerId],
+                        [CareerItem].[Title]
+                    FROM
+                        [Career]
+                    INNER JOIN
+                        [CareerItem] ON [CareerItem].[CareerId] = [Career].[Id]
+                    ORDER BY
+                        [Career].[Title]";
+                   
+            var careers = connection.Query<Career, CareerItem, Career>(
+                sql, 
+                (career, careerItem) => 
+                {
+                    return career;
+                }, splitOn: "[CareerId]");
+
+            foreach (var career in careers)
+            {
+                Console.WriteLine($"{career.Title}");
+                foreach (var item in career.Items)
+                {
+                    Console.WriteLine($"{item.Title}");
+                }
+            }
+        }
+
     }
 
 
