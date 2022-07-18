@@ -26,6 +26,7 @@ namespace DataAccess_Dapper
                 //CreateManyCategory(connection);
                 //ExecuteProcedure(connection);
                 //ExecuteReadProcedure(connection);
+                //ExecuteScalar(connection);
             }
         }
 
@@ -191,6 +192,17 @@ namespace DataAccess_Dapper
 
             Console.WriteLine($"A categoria inserida foi: {id}");
         }
+
+        static void ReadView(SqlConnection connection)
+        {
+            var sql = "SELECT FROM [viewName]";
+            var categories = connection.Query(sql);
+            foreach (var item in categories)
+            {
+                Console.WriteLine($"{item.Id}");
+            }
+        }
+       
     }
 
 
