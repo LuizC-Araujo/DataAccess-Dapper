@@ -26,6 +26,7 @@ namespace DataAccess_Dapper
                 //CreateManyCategory(connection);
 
                 ExecuteProcedure(connection);
+                ExecuteReadProcedure(connection);
             }
         }
 
@@ -141,10 +142,28 @@ namespace DataAccess_Dapper
             var procedure = "[procedure_name]";
             var pars = new { Id = "b9809ce4-85f2-41e5-9cf3-dc4975f167a4" };
 
-            connection.Execute(
+            var affectedRows = connection.Execute(
                 procedure, 
                 pars, 
                 commandType: CommandType.StoredProcedure);
+
+            Console.WriteLine($"{affectedRows} linhas afetadas");
+        }
+
+        static void ExecuteReadProcedure(SqlConnection connection)
+        {
+            var procedure = "[procedure_name]";
+            var pars = new { Id = "b9809ce4-85f2-41e5-9cf3-dc4975f167a4" };
+
+            var categorias = connection.Query(
+                procedure,
+                pars,
+                commandType: CommandType.StoredProcedure);
+
+            foreach(var categoria in categorias)
+            {
+                Console.WriteLine(categoria.Id);
+            }
         }
     }
 
