@@ -27,6 +27,7 @@ namespace DataAccess_Dapper
                 //ExecuteProcedure(connection);
                 //ExecuteReadProcedure(connection);
                 //ExecuteScalar(connection);
+                //ReadView(connection);
             }
         }
 
