@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Data.SqlClient;
 
 using Dapper;
@@ -18,9 +19,13 @@ namespace DataAccess_Dapper
 
             using (var connection = new SqlConnection(connectionString))
             {
-                ListCategories(connection);
-                CreateCategory(connection); 
-                CreateManyCategory(connection);
+                //ListCategories(connection);
+                //DeleteCategory(connection);
+                //UpdateCategory(connection);
+                //CreateCategory(connection); 
+                //CreateManyCategory(connection);
+
+                ExecuteProcedure(connection);
             }
         }
 
@@ -129,6 +134,17 @@ namespace DataAccess_Dapper
             });
 
             Console.WriteLine($"{rows} linhas inseridas");
+        }
+
+        static void ExecuteProcedure(SqlConnection connection)
+        {
+            var procedure = "[procedure_name]";
+            var pars = new { Id = "b9809ce4-85f2-41e5-9cf3-dc4975f167a4" };
+
+            connection.Execute(
+                procedure, 
+                pars, 
+                commandType: CommandType.StoredProcedure);
         }
     }
 
