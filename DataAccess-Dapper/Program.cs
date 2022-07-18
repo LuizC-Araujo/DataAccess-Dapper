@@ -72,6 +72,15 @@ namespace DataAccess_Dapper
             });
         }
 
+        static void DeleteCategory(SqlConnection connection)
+        {
+            var deleteQuery = "DELETE [Category] WHERE [id]=@id";
+            var rows = connection.Execute(deleteQuery, new
+            {
+                id = new Guid("b9809ce4-85f2-41e5-9cf3-dc4975f167a4")
+            });
+        }
+
         static void CreateManyCategory(SqlConnection connection)
         {
             var category = new Category();
